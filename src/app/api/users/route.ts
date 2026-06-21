@@ -21,6 +21,11 @@ export async function GET(req: Request) {
     }
 
     const users = await prisma.user.findMany({
+      where: {
+    id: {
+      not: decoded.userId,
+    },
+  },
       orderBy: { createdAt: "desc" },
       select: {
         id: true,
